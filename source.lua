@@ -1297,7 +1297,7 @@ function Kavo.CreateLib(kavName, themeList)
                 UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
 		-- Normalize defaultvalue within minValue and maxValue
-		local normalizedValue = (defaultvalue - minValue) / (maxValue - minValue)
+		local normalizedValue = (defaultvalue - minvalue) / (maxvalue - minvalue)
 
 		-- Scale to slider's pixel range
 		local sliderPosition = 0 + normalizedValue * (149 - 0)
