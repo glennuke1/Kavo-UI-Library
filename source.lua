@@ -1219,7 +1219,7 @@ function Kavo.CreateLib(kavName, themeList)
                     return TogFunction
             end
 
-            function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
+            function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, defaultvalue, callback)
                 slidInf = slidInf or "Slider"
                 slidTip = slidTip or "Slider tip here"
                 maxvalue = maxvalue or 500
@@ -1296,12 +1296,19 @@ function Kavo.CreateLib(kavName, themeList)
                 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                 UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
+		-- Normalize defaultvalue within minValue and maxValue
+		local normalizedValue = (defaultvalue - minValue) / (maxValue - minValue)
+
+		-- Scale to slider's pixel range
+		local sliderPosition = 0 + normalizedValue * (149 - 0)
+
                 sliderDrag.Name = "sliderDrag"
                 sliderDrag.Parent = sliderBtn
                 sliderDrag.BackgroundColor3 = themeList.SchemeColor
                 sliderDrag.BorderColor3 = Color3.fromRGB(74, 99, 135)
                 sliderDrag.BorderSizePixel = 0
                 sliderDrag.Size = UDim2.new(-0.671140969, 100,1,0)
+		sliderDrag:TweenSize(UDim2.new(0, math.clamp(sliderPosition, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
 
                 UICorner_3.Parent = sliderDrag
 
@@ -1324,7 +1331,7 @@ function Kavo.CreateLib(kavName, themeList)
                 val.Position = UDim2.new(0.352386296, 0, 0.272727281, 0)
                 val.Size = UDim2.new(0, 41, 0, 14)
                 val.Font = Enum.Font.GothamSemibold
-                val.Text = minvalue
+                val.Text = defaultvalue
                 val.TextColor3 = themeList.TextColor
                 val.TextSize = 14.000
                 val.TextTransparency = 1.000
