@@ -1296,11 +1296,11 @@ function Kavo.CreateLib(kavName, themeList)
                 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                 UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 
-		local normalizedValue = (defaultvalue - minvalue) / (maxvalue - minvalue)
+		        local normalizedValue = (defaultvalue - minvalue) / (maxvalue - minvalue)
 
-		print(normalizedValue)
+		        local sliderPosition = 0 + normalizedValue * (149 - 0)
 
-		local sliderPosition = 0 + normalizedValue * (149 - 0)
+                callback(defaultvalue)
 
                 sliderDrag.Name = "sliderDrag"
                 sliderDrag.Parent = sliderBtn
